@@ -1,0 +1,27 @@
+<idea-plugin>
+    <id>com.rahul.gqlformat</id>
+    <name>Gql Formatter</name>
+    <vendor email="tgunix@gmail.com" url="https://www.rahullohra.com">Rahul Lohra</vendor>
+
+    <description>
+        <![CDATA[
+      Properly format your gql queries
+      <br> Thank you
+    ]]>
+    </description>
+
+
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.lang</depends>
+    <!--    <depends>com.intellij.modules.java</depends>-->
+    <depends>org.jetbrains.kotlin</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow
+                id="com.rahul.gqlformat.MyToolWindow" anchor="right" factoryClass="com.rahul.gqlformat.MyToolWindow">
+        </toolWindow>
+    </extensions>
+
+</idea-plugin>

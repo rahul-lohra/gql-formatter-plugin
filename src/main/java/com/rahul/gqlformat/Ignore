@@ -1,0 +1,26 @@
+Functions to ignore -
+======START=================KtTreeVisitorVoid========================
+override fun visitElement(element: PsiElement) {
+                super.visitElement(element)
+                if (element is LeafPsiElement) {
+                    val parent = element.parent
+                    print(parent)
+                }
+            }
+
+            override fun visitStringTemplateExpression(expression: KtStringTemplateExpression) {
+                super.visitStringTemplateExpression(expression)
+            }
+
+            override fun visitConstantExpression(expression: KtConstantExpression) {
+                super.visitConstantExpression(expression)
+            }
+
+            override fun visitClassBody(classBody: KtClassBody) {
+                super.visitClassBody(classBody)
+            }
+
+            override fun visitTypeReference(typeReference: KtTypeReference) {
+                super.visitTypeReference(typeReference)
+            }
+======END=================KtTreeVisitorVoid========================
