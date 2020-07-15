@@ -57,10 +57,9 @@ class EditorLogic {
         var replaceCount = 0
         while (dollarMatcher.find()) {
             val startIndex = dollarMatcher.start()
-            val endIndex = dollarMatcher.end()
             if (!indexesToIgnore.contains(startIndex)) {
                 val offset =   replaceCount * (replaceValue.length - dollarLength)
-                finalText = finalText.replaceRange(startIndex + offset, endIndex+1 + offset, replaceValue)
+                finalText = finalText.replaceRange(startIndex + offset, startIndex + offset + dollarLength, replaceValue)
                 replaceCount += 1
             }
         }
