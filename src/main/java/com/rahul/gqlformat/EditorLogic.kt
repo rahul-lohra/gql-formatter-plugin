@@ -41,7 +41,7 @@ class EditorLogic {
         val indexesToIgnore = hashSetOf<Int>()
         while (matcher.find()) {
             val startIndex = matcher.start()
-            val endIndex = matcher.start()
+            val endIndex = matcher.end()
 
             for (i in startIndex..endIndex) {
                 indexesToIgnore.add(i)
@@ -57,7 +57,7 @@ class EditorLogic {
         var replaceCount = 0
         while (dollarMatcher.find()) {
             val startIndex = dollarMatcher.start()
-            val endIndex = dollarMatcher.start()
+            val endIndex = dollarMatcher.end()
             if (!indexesToIgnore.contains(startIndex)) {
                 val offset =   replaceCount * (replaceValue.length - dollarLength)
                 finalText = finalText.replaceRange(startIndex + offset, endIndex+1 + offset, replaceValue)
