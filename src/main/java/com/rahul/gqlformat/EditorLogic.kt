@@ -34,17 +34,19 @@ class EditorLogic {
 
     fun replaceDollar(inputString: String):String{
         var finalText = inputString
-
-        val doubleDollarRegex = "\\$\\$"
-        val doubleDollarPattern = Pattern.compile(doubleDollarRegex)
-        val matcher = doubleDollarPattern.matcher(inputString)
         val indexesToIgnore = hashSetOf<Int>()
-        while (matcher.find()) {
-            val startIndex = matcher.start()
-            val endIndex = matcher.end()
+        val patternsToIgnore = arrayListOf("\\$\\$","\\$\\{\"\\$\"}")
 
-            for (i in startIndex..endIndex) {
-                indexesToIgnore.add(i)
+        patternsToIgnore.forEach {
+            val doubleDollarPattern = Pattern.compile(it)
+            val matcher = doubleDollarPattern.matcher(inputString)
+
+            while (matcher.find()) {
+                val startIndex = matcher.start()
+                val endIndex = matcher.end()
+                for (i in startIndex..endIndex) {
+                    indexesToIgnore.add(i)
+                }
             }
         }
 
