@@ -20,7 +20,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow
-                id="com.rahul.gqlformat.MyToolWindow" anchor="right" factoryClass="com.rahul.gqlformat.MyToolWindow">
+                id="Gql Format" anchor="right" factoryClass="com.rahul.gqlformat.MyToolWindow">
         </toolWindow>
     </extensions>
 

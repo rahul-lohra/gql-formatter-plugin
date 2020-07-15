@@ -10,17 +10,12 @@ import com.intellij.psi.impl.source.PsiFieldImpl
 import com.intellij.psi.impl.source.tree.LeafPsiElement
 import com.intellij.psi.impl.source.tree.java.PsiLiteralExpressionImpl
 import com.rahul.gqlformat.parser.NodeCreator
-import org.jetbrains.kotlin.lexer.KtToken
 import org.jetbrains.kotlin.nj2k.postProcessing.type
 import org.jetbrains.kotlin.psi.*
-import org.jetbrains.kotlin.psi.psiUtil.KtStringTemplateExpressionManipulator
-import org.jetbrains.kotlin.psi.psiUtil.findDescendantOfType
-import org.jetbrains.kotlin.types.KotlinType
-import java.lang.RuntimeException
-import java.lang.StringBuilder
+import java.util.regex.Matcher
 import java.util.regex.Pattern
 import javax.swing.JTextArea
-import kotlin.math.exp
+
 
 class EditorLogic {
 
@@ -33,23 +28,65 @@ class EditorLogic {
             return
         }
         expressionElement?.let { psiElement ->
-            performReplace(textArea, psiElement)
+            performReplace(variableName.length, textArea, psiElement)
         }
     }
 
-    fun performReplace(textArea: JTextArea, psiElement: PsiElement) {
+    fun replaceDollar(inputString: String):String{
+        var finalText = inputString
+
+        val doubleDollarRegex = "\\$\\$"
+        val doubleDollarPattern = Pattern.compile(doubleDollarRegex)
+        val matcher = doubleDollarPattern.matcher(inputString)
+        val indexesToIgnore = hashSetOf<Int>()
+        while (matcher.find()) {
+            val startIndex = matcher.start()
+            val endIndex = matcher.start()
+
+            for (i in startIndex..endIndex) {
+                indexesToIgnore.add(i)
+            }
+        }
+
+        val replaceValue = "\${\"$\"}"
+        val dollarRegex = "\\$"
+        val dollarLength = 1
+        val dollarPattern = Pattern.compile(dollarRegex)
+        val dollarMatcher = dollarPattern.matcher(inputString)
+
+        var replaceCount = 0
+        while (dollarMatcher.find()) {
+            val startIndex = dollarMatcher.start()
+            val endIndex = dollarMatcher.start()
+            if (!indexesToIgnore.contains(startIndex)) {
+                val offset =   replaceCount * (replaceValue.length - dollarLength)
+                finalText = finalText.replaceRange(startIndex + offset, endIndex+1 + offset, replaceValue)
+                replaceCount += 1
+            }
+        }
+        return finalText
+    }
+
+    fun performReplace(variableNameLength: Int, textArea: JTextArea, psiElement: PsiElement) {
         val editor = FileEditorManager.getInstance(psiElement.project).selectedTextEditor
         val col = (editor as EditorImpl).offsetToLogicalPosition(psiElement.textOffset).column
-
+        val variableCol = editor.offsetToLogicalPosition(psiElement.parent.textOffset).column
+        val offset = variableCol
         val node = nodeCreator.createNode(textArea.text)
-        val nodeText = nodeCreator.prettyPrint2(node, col)
+        val nodeText = nodeCreator.prettyPrint2(node, offset)
+        val offsetSpace = StringBuilder()
+        for (i in 0 until variableCol) {
+            offsetSpace.append(" ")
+        }
+        val dollarUpdatedText = replaceDollar(nodeText)
+
         val sb = StringBuilder()
         sb.append("\"\"")
-        sb.append(nodeText.replace("$","\${\"$\"}"))
+        sb.appendln()
+        sb.append(offsetSpace)
+        sb.append(dollarUpdatedText)
         sb.append("\"\"")
-        val t = sb.toString().trimEnd()
-//        val t = sb.toString().replace("$","\$\\{\"$\"}").trimEnd()
-        val finalText1 = t.replace("\"", "\\\"").replace("\\\"", "")
+        val t = sb.toString().trimIndent()
         val finalText2 = t
         val e1 = KtPsiFactory(psiElement.project).createStringTemplate(finalText2)
 
