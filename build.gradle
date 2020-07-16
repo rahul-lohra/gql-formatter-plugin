@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'com.rahul.gqlformat'
-version '1.0'
+version pluginVersion
 
 sourceCompatibility = 1.8
 
