@@ -5,7 +5,9 @@
 
     <description>
         <![CDATA[
-      Properly format your gql queries
+      1. Language Supported - Kotlin only
+      2. It will reformat your GQL query that is stored in some variable (The idea is very similar to JSON Formatter)
+      3. You can then replace this formatted GQL query into that variable
       <br> Thank you
     ]]>
     </description>
