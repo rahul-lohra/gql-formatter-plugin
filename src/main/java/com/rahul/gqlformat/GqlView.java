@@ -34,7 +34,7 @@ public class GqlView {
             if (TextUtils.isEmpty(variableName)) {
                 showErrorMessage("Variable name must not be empty");
             }else{
-                editorLogic.replace(variableName, textArea);
+                editorLogic.replace(textArea);
             }
 
         });

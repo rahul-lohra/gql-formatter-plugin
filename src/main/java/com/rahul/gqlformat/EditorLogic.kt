@@ -22,13 +22,13 @@ class EditorLogic {
     val nodeCreator = NodeCreator()
     var expressionElement: PsiElement? = null
 
-    fun replace(variableName: String, textArea: JTextArea) {
+    fun replace(textArea: JTextArea) {
 
         if (expressionElement == null) {
             return
         }
         expressionElement?.let { psiElement ->
-            performReplace(variableName.length, textArea, psiElement)
+            performReplace(textArea, psiElement)
         }
     }
 
@@ -68,10 +68,9 @@ class EditorLogic {
         return finalText
     }
 
-    fun performReplace(variableNameLength: Int, textArea: JTextArea, psiElement: PsiElement) {
+    fun performReplace(textArea: JTextArea, psiElement: PsiElement) {
         val editor = FileEditorManager.getInstance(psiElement.project).selectedTextEditor
-        val col = (editor as EditorImpl).offsetToLogicalPosition(psiElement.textOffset).column
-        val variableCol = editor.offsetToLogicalPosition(psiElement.parent.textOffset).column
+        val variableCol = (editor as EditorImpl).offsetToLogicalPosition(psiElement.parent.textOffset).column
         val offset = variableCol
         val node = nodeCreator.createNode(textArea.text)
         val nodeText = nodeCreator.prettyPrint2(node, offset)
@@ -108,10 +107,6 @@ class EditorLogic {
                 .trimEnd()
         }
         return ""
-    }
-
-    fun getTextFromKtStringTemplateExpression2(element: KtStringTemplateExpression): String {
-        return element.text.replace("\"", "").trimEnd()
     }
 
     fun findTextInVariable(psiElement: PsiElement): String {
@@ -215,45 +210,3 @@ class EditorLogic {
         expressionElement = null
     }
 }
-//KtPsiFactory(psiElement.project).createStringTemplate("m S ('\$promoCode': String!) {\\n" +
-//"S(promoCode: \$promoCode) {\\n"+
-//"Success" +
-//"}"+
-//"}").text
-
-//KtPsiFactory(psiElement.project).createStringTemplate("""[{
-//    \nquery""".replace("\n","")).text
-
-//val sb = StringBuilder()
-//val items = textArea.text.split("\n")
-//for(item in items){
-//    sb.append(item)
-//    sb.append("\\n")
-//}
-//sb.toString().trimEnd()
-
-//KtPsiFactory(expressionElement!!.project).createStringTemplate("""{
-//            "category_id" :%s
-//        }""".replace("\n","").replace("\"","\\\"").replace("\\\"","")).text
-
-//val sb = StringBuilder()
-//val items = textArea.text.split("\n")
-//for(item in items){
-//    sb.append(item)
-//}
-//val t = sb.toString().trimEnd()
-//
-//KtPsiFactory(psiElement.project).createStringTemplate(t.replace("\"","\\\"").replace("\\\"","")).text
-
-//val singleLine = "\"\"\nhello \nworld\n\"\""
-//val singleLineTripleQuote = """hello${"\n"}world""".trimMargin()
-//val multiLineTripleQuote = """hello
-//world""".trimMargin()
-//
-//val e1 = KtPsiFactory(psiElement.project).createStringTemplate(singleLine)
-////val e1 = KtPsiFactory(psiElement.project).createExpression(multiLine)
-//e1.text
-////singleLine
-////val e2 = CodeStyleManager.getInstance(psiElement.project).reformat(e1)
-//
-////singleLine.toCharArray()

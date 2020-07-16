@@ -5,10 +5,13 @@
 
     <description>
         <![CDATA[
-      1. Language Supported - Kotlin only
-      2. It will reformat your GQL query that is stored in some variable (The idea is very similar to JSON Formatter)
-      3. You can then replace this formatted GQL query into that variable
-      <br> Thank you
+<p>Language Supported&nbsp;</p>
+<p>1. Kotlin</p>
+<p><br></p>
+<p>What this tool will do -&nbsp;</p>
+<p>1. It will reformat your GQL query that is stored in some variable (The idea is very similar to JSON Formatter)</p>
+<p>2. You can then replace this formatted GQL query into that variable&nbsp;</p>
+<p><br></p>
     ]]>
     </description>
 
