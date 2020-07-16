@@ -8,12 +8,12 @@ What this tool will do -
 2. You can then replace this formatted GQL query into that variable 
 
 How to use -
-1. Open the tool window from RIGHT ![screen](../master/screens/src_editor.png)
+1. Open the tool window from RIGHT ![screen](../master/screens/scr_editor.png)
 2. Navigate to your kotlin file where you have written your GQL queries
 3. Enter the variable name which you want to reformat
-4. Click Import You will see a readable version of that GQL query stored in that variable ![screen](../master/screens/src_import.png)
+4. Click Import You will see a readable version of that GQL query stored in that variable ![screen](../master/screens/scr_import.png)
 6. Now you can also edit your GQL queries in this tool window
-7. Click Replace to finally your replace your edited text from tool window to your variable's value ![screen](../master/screens/src_replace.png)
+7. Click Replace to finally your replace your edited text from tool window to your variable's value ![screen](../master/screens/scr_replace.png)
 
 Few things to note - 
 
