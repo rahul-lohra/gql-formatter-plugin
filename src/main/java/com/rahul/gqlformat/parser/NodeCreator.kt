@@ -1,11 +1,11 @@
 package com.rahul.gqlformat.parser
 
-import com.rahul.gqlformat.parser.Node
 import java.util.*
 import kotlin.text.StringBuilder
 
 var spaceCount = 0
 const val INDENT = 4
+const val IS_DEBUG = false
 
 class NodeCreator {
 
@@ -28,7 +28,7 @@ class NodeCreator {
         fun printIndent() {
             for (i in 0 until stackSpace.peek() + defaultIndent) {
                 sb.append(" ")
-                print(" ")
+                printText(" ")
             }
         }
 
@@ -56,17 +56,17 @@ class NodeCreator {
 
             if (printNextLineForCurrentWord) {
                 sb.append("\n")
-                println()
+                printNewLine()
                 printIndent()
             }
 
             //add space in current line
             if (word == ":") {
                 sb.append(" ")
-                print(" ")
+                printText(" ")
             } else if (word.contains("mutation")) {
                 sb.append(" ")
-                print(" ")
+                printText(" ")
             } else if (node.variable != null) {
 
                 var printSpace = false
@@ -84,20 +84,20 @@ class NodeCreator {
 
                 if (printSpace) {
                     sb.append(" ")
-                    print(" ")
+                    printText(" ")
                 }
             }
 
             if (word != "ROOT") {
                 sb.append(word)
-                print(word)
+                printText(word)
             }
 
             //for next word
             if (word == "[" || word == "{") {
                 stackSpace.push(stackSpace.peek() + INDENT)
                 sb.append("\n")
-                println()
+                printNewLine()
                 printIndent()
             }
 
@@ -258,5 +258,17 @@ class NodeCreator {
             index += 1
         }
         return root
+    }
+
+    fun printText(text: String) {
+        if (IS_DEBUG) {
+            print(text)
+        }
+    }
+
+    fun printNewLine() {
+        if (IS_DEBUG) {
+            println()
+        }
     }
 }
