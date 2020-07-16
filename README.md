@@ -8,12 +8,12 @@ What this tool will do -
 2. You can then replace this formatted GQL query into that variable 
 
 How to use -
-1. Open the tool window from RIGHT []
+1. Open the tool window from RIGHT ![screen](../master/screens/src_editor.png)
 2. Navigate to your kotlin file where you have written your GQL queries
-3. Enter the variable name which you want to reformat []
-4. Click Import You will see a readable version of that GQL query stored in that variable []
+3. Enter the variable name which you want to reformat
+4. Click Import You will see a readable version of that GQL query stored in that variable ![screen](../master/screens/src_import.png)
 6. Now you can also edit your GQL queries in this tool window
-7. Click Replace to finally your replace your edited text from tool window to your variable's value []
+7. Click Replace to finally your replace your edited text from tool window to your variable's value ![screen](../master/screens/src_replace.png)
 
 Few things to note - 
 
@@ -22,7 +22,7 @@ Dollar replace logic
 2. $$ and ${"$"} will not be changed
 
 
-Video - 
+Video - https://youtu.be/zP1y7HndSlM
 
 Feel free to request features / open issues
 
