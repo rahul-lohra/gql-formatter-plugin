@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.rahul.gqlformat</id>
     <name>Gql Formatter</name>
-    <vendor email="tgunix@gmail.com" url="https://www.rahullohra.com">Rahul Lohra</vendor>
+    <vendor email="tgunix@gmail.com" url="https://github.com/rahul-lohra/gql-formatter-plugin">Rahul Lohra</vendor>
 
     <description>
         <![CDATA[
