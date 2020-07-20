@@ -12,6 +12,7 @@ public class GqlView {
     private JTextField tfVariableName;
     private JButton btnReplace;
     private JLabel labelError;
+    private JCheckBox cbDollar;
     private Project project;
     private EditorLogic editorLogic;
     Timer errorTimer;
@@ -34,7 +35,7 @@ public class GqlView {
             if (TextUtils.isEmpty(variableName)) {
                 showErrorMessage("Variable name must not be empty");
             }else{
-                editorLogic.replace(textArea);
+                editorLogic.replace(textArea, !cbDollar.isSelected());
             }
 
         });

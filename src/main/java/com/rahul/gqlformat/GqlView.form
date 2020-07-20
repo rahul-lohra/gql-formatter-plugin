@@ -45,6 +45,12 @@
               <text value="Replace"/>
             </properties>
           </component>
+          <component id="e8e3a" class="javax.swing.JCheckBox" binding="cbDollar">
+            <constraints/>
+            <properties>
+              <text value="Don't replace $"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <component id="7401a" class="javax.swing.JLabel" binding="labelError">

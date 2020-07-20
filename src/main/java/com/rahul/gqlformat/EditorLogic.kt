@@ -22,13 +22,13 @@ class EditorLogic {
     val nodeCreator = NodeCreator()
     var expressionElement: PsiElement? = null
 
-    fun replace(textArea: JTextArea) {
+    fun replace(textArea: JTextArea, replaceDollar:Boolean) {
 
         if (expressionElement == null) {
             return
         }
         expressionElement?.let { psiElement ->
-            performReplace(textArea, psiElement)
+            performReplace(textArea, psiElement, replaceDollar)
         }
     }
 
@@ -68,7 +68,7 @@ class EditorLogic {
         return finalText
     }
 
-    fun performReplace(textArea: JTextArea, psiElement: PsiElement) {
+    fun performReplace(textArea: JTextArea, psiElement: PsiElement, replaceDollar:Boolean) {
         val editor = FileEditorManager.getInstance(psiElement.project).selectedTextEditor
         val variableCol = (editor as EditorImpl).offsetToLogicalPosition(psiElement.parent.textOffset).column
         val offset = variableCol
@@ -78,7 +78,7 @@ class EditorLogic {
         for (i in 0 until variableCol) {
             offsetSpace.append(" ")
         }
-        val dollarUpdatedText = replaceDollar(nodeText)
+        val dollarUpdatedText = if (replaceDollar) replaceDollar(nodeText) else nodeText
 
         val sb = StringBuilder()
         sb.append("\"\"")
