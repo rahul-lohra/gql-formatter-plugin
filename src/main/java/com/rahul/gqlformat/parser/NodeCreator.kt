@@ -71,12 +71,12 @@ class NodeCreator {
 
                 var printSpace = false
                 while (stack.isNotEmpty()) {
-                    val node = stack.peek()
-                    if (node.word.contains("query") || node.word.contains("mutation")) {
+                    val peekNode = stack.peek()
+                    if (peekNode.word.contains("query") || peekNode.word.contains("mutation")) {
                         printSpace = true
                         break
                     }
-                    if (node.word == "{") {
+                    if (peekNode.word == "{") {
                         break
                     }
                     stack.pop()
