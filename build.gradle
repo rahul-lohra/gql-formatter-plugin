@@ -30,6 +30,6 @@ buildSearchableOptions {
 
 patchPluginXml {
     version = project.version
-    sinceBuild = '201'
+    sinceBuild = '191'
     untilBuild = '201.*'
 }
